@@ -1,0 +1,79 @@
+body {
+    background-color: aliceblue;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cousine', monospace;
+}
+
+.container {
+    width: 90vw;
+    height: 90vh;
+    padding: 5vh 5vw;
+    .header {
+        display: grid;
+        grid-template-columns: minmax(100px, 10vw) 1fr repeat(3, minmax(100px, 10vw));
+        grid-template-rows: 70px;
+        &_logo {
+            grid-column: 1/2;
+            font-size: 3rem;
+        }
+    }
+    .game {
+        display: grid;
+        margin-top: 3vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 50px 50px 35vh 100px;
+        &_title {
+            grid-column: 1/2;
+            grid-row: 1/2;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        &_round {
+            grid-column: 1/2;
+            grid-row: 2/3;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        &_board {
+            grid-column: 1/2;
+            grid-row: 3/4;
+            margin: auto;
+            &_wrap {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 35vh;
+            }
+            &_paper {
+                grid-column: 1/2;
+                grid-row: 1/2;
+                width: 30vh;
+                height: 30vh;
+                border: solid 1px black;
+                margin: auto 1vw;
+                display: flex;
+            }
+            &_rock {
+                grid-column: 2/3;
+                grid-row: 1/2;
+                width: 30vh;
+                height: 30vh;
+                border: solid 1px black;
+                margin: auto 1vw;
+            }
+            &_scissors {
+                grid-column: 3/4;
+                grid-row: 1/2;
+                width: 30vh;
+                height: 30vh;
+                border: solid 1px black;
+                margin: auto 1vw;
+            }
+        }
+        &_score {
+            grid-column: 1/2;
+            grid-row: 4/5;
+        }
+    }
+}
