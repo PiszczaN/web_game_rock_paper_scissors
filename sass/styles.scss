@@ -9,6 +9,9 @@ body {
     width: 90vw;
     height: 90vh;
     padding: 5vh 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .header {
         display: grid;
         grid-template-columns: minmax(100px, 10vw) 1fr repeat(3, minmax(100px, 10vw));
@@ -20,7 +23,6 @@ body {
     }
     .game {
         display: grid;
-        margin-top: 3vh;
         grid-template-columns: 1fr;
         grid-template-rows: 50px 50px 20vw 100px;
         &_title {
@@ -97,13 +99,29 @@ body {
             }
         }
     }
-    footer {
+    .footer {
         display: flex;
         justify-content: space-between;
         position: relative;
-        bottom: -10vh;
+        bottom: 0;
+        left: 0;
         width: 100%;
         font-size: 1.5rem;
         text-transform: uppercase;
+    }
+}
+
+@media(max-width: 1000px) {
+    .container {
+        display: block;
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 90%;
+            padding: 5%;
+            border-top: solid 1px black;
+            font-size: 1rem;
+        }
     }
 }
