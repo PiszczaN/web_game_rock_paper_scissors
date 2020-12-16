@@ -13,18 +13,17 @@ body {
     flex-direction: column;
     justify-content: space-between;
     .header {
-        display: grid;
-        grid-template-columns: minmax(100px, 10vw) 1fr repeat(3, minmax(100px, 10vw));
-        grid-template-rows: 70px;
+        display: flex;
+        justify-content: space-between;
         &_logo {
-            grid-column: 1/2;
             font-size: 3rem;
         }
     }
     .game {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 50px 50px 20vw 100px;
+        grid-template-rows: auto auto 20vw 1fr;
+        height: 80%;
         &_title {
             grid-column: 1/2;
             grid-row: 1/2;
@@ -37,16 +36,16 @@ body {
             grid-row: 2/3;
             text-align: center;
             font-size: 1.5rem;
+            padding: 1rem;
         }
         &_board {
             grid-column: 1/2;
             grid-row: 3/4;
+            margin-top: 1rem;
             &_wrap {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(100px, 20vw));
-                grid-template-rows: 20vw;
+                display: flex;
+                align-items: center;
                 justify-content: center;
-                align-content: center;
             }
             &_item {
                 width: 20vw;
@@ -67,21 +66,15 @@ body {
         &_score {
             grid-column: 1/2;
             grid-row: 4/5;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: repeat(2, 1fr);
             &_title {
-                grid-column: 1/2;
-                grid-row: 1/2;
                 display: flex;
                 justify-content: center;
                 align-content: center;
                 font-weight: 900;
                 font-size: 1.5rem;
+                margin: 1.5rem;
             }
             &_wrap {
-                grid-column: 1/2;
-                grid-row: 2/3;
                 display: flex;
                 justify-content: center;
                 align-content: center;
@@ -89,12 +82,13 @@ body {
             &_content {
                 margin: 0 3%;
                 font-size: 1.2rem;
+                font-weight: 100;
             }
             &_counters {
                 display: flex;
                 justify-content: center;
                 align-content: center;
-                font-weight: 400;
+                font-weight: 700;
                 font-size: 1.5rem;
             }
         }
@@ -118,10 +112,66 @@ body {
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 90%;
-            padding: 5%;
+            width: 92vw;
+            padding: 2vh 4vw;
             border-top: solid 1px black;
             font-size: 1rem;
+        }
+        .game {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 27vw 1fr;
+            .game_title {
+                margin-top: 2rem;
+            }
+            .game_score {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+            .game_board_item {
+                width: 25vw;
+                height: 25vw;
+            }
+            .game_board_image {
+                width: 24vw;
+                height: 24vw;
+            }
+            .game_board_icon {
+                display: none;
+            }
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .header {
+        .header_logo {
+            font-size: 2rem;
+        }
+    }
+    .game {
+        .game_title {
+            font-size: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .game_round {
+            font-size: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .game_score {
+            transform: scale(0.9);
+            &_title {
+                margin: 1rem;
+            }
+            &_counters {
+                font-size: 2rem;
+            }
         }
     }
 }
