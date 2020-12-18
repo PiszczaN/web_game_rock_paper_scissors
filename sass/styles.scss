@@ -15,7 +15,7 @@ body {
     .header {
         display: flex;
         justify-content: space-between;
-        &_logo {
+        &__logo {
             font-size: 3rem;
         }
     }
@@ -24,49 +24,49 @@ body {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 20vw 1fr;
         height: 80%;
-        &_title {
+        &__title {
             grid-column: 1/2;
             grid-row: 1/2;
             text-align: center;
             font-size: 2rem;
             font-weight: 700;
         }
-        &_round {
+        &__round {
             grid-column: 1/2;
             grid-row: 2/3;
             text-align: center;
             font-size: 1.5rem;
             padding: 1rem;
         }
-        &_board {
+        &__board {
             grid-column: 1/2;
             grid-row: 3/4;
             margin-top: 1rem;
-            &_wrap {
+            .gameBoard {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-            &_item {
+            .gameBoard__item {
                 width: 20vw;
                 height: 20vw;
             }
-            &_image {
+            .gameBoardItem__image {
                 width: 15vw;
                 height: 15vw;
                 border: solid 1px black;
                 margin: auto;
             }
-            &_icon {
+            .gameBoardItem__icon {
                 display: flex;
                 justify-content: center;
                 margin: 5%;
             }
         }
-        &_score {
+        &__score {
             grid-column: 1/2;
             grid-row: 4/5;
-            &_title {
+            .gameScore__title {
                 display: flex;
                 justify-content: center;
                 align-content: center;
@@ -74,17 +74,17 @@ body {
                 font-size: 1.5rem;
                 margin: 1.5rem;
             }
-            &_wrap {
+            .gameScore__wrap {
                 display: flex;
                 justify-content: center;
                 align-content: center;
             }
-            &_content {
+            .gameScore__content {
                 margin: 0 3%;
                 font-size: 1.2rem;
                 font-weight: 100;
             }
-            &_counters {
+            .gameScore__counters {
                 display: flex;
                 justify-content: center;
                 align-content: center;
@@ -96,11 +96,8 @@ body {
     .footer {
         display: flex;
         justify-content: space-between;
-        position: relative;
-        bottom: 0;
-        left: 0;
         width: 100%;
-        font-size: 1.5rem;
+        font-size: 1rem;
         text-transform: uppercase;
     }
 }
@@ -121,23 +118,23 @@ body {
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto auto 27vw 1fr;
-            .game_title {
+            .game__title {
                 margin-top: 2rem;
             }
-            .game_score {
+            .game__score {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
             }
-            .game_board_item {
+            .gameBoard__item {
                 width: 25vw;
                 height: 25vw;
             }
-            .game_board_image {
+            .gameBoardItem__image {
                 width: 24vw;
                 height: 24vw;
             }
-            .game_board_icon {
+            .gameBoardItem__icon {
                 display: none;
             }
         }
@@ -146,30 +143,30 @@ body {
 
 @media(max-width: 500px) {
     .header {
-        .header_logo {
+        .header__logo {
             font-size: 2rem;
         }
     }
     .game {
-        .game_title {
+        .game__title {
             font-size: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
         }
-        .game_round {
+        .game__round {
             font-size: 1rem;
             padding: 0.5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        .game_score {
+        .game__score {
             transform: scale(0.9);
-            &_title {
+            .gameScore__title {
                 margin: 1rem;
             }
-            &_counters {
+            .gameScore__counters {
                 font-size: 2rem;
             }
         }
