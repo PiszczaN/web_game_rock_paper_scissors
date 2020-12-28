@@ -1,3 +1,6 @@
-export const PAPER = 1;
-export const STONE = 2;
-export const SCISSORS = 3;
+export class GamePawn {
+    constructor(num, html) {
+        this.num = num;
+        this.html = html;
+    }
+}

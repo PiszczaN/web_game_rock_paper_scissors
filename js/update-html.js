@@ -25,13 +25,10 @@ export class UpdateHtml {
         }
     }
     matchResultView(result, player, computer) {
-        const paper = '<div class="gameBoardItem__image">papier</div>';
-        const stone = '<div class="gameBoardItem__image">kamien</div>';
-        const scissors = '<div class="gameBoardItem__image">nożyce</div>';
         const board = document.querySelector(".gameBoard");
         const gameBoard = document.querySelector(".game__board");
 
 
-        board.innerHTML = `<div class="gameBoard__item">${paper}</div><div class="gameBoard__item">${stone}</div>`;
+        board.innerHTML = `<div class="gameBoard__item">${player}</div><div class="gameBoard__item">${computer}</div>`;
     }
 }
