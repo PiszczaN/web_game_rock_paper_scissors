@@ -74,9 +74,9 @@ export class UpdateHtml {
     matchView() {
         UpdateHtml.isCheck = true;
         this.gameRound.innerHTML = `Runda ${++UpdateHtml.roundCounter}. Wybierz symbol`;
-        this.board.innerHTML = `<div class="gameBoard__item">${pawns[0].html}${pawns[3].html}</div>
-            <div class = "gameBoard__item">${pawns[1].html}${pawns[4].html}</div>
-            <div class = "gameBoard__item">${pawns[2].html}${pawns[5].html}</div>`;
+        this.board.innerHTML = `<div class="gameBoard__item">${pawns.get("paper").html}${pawns.get("arrowLeft").html}</div>
+            <div class = "gameBoard__item">${pawns.get("stone").html}${pawns.get("arrowDown").html}</div>
+            <div class = "gameBoard__item">${pawns.get("scissors").html}${pawns.get("arrowRight").html}</div>`;
 
         const gameResume = new Options();
         gameResume.init();

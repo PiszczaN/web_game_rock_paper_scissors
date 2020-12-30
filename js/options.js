@@ -9,11 +9,11 @@ export class Options {
     aiPawn(pawn) {
         switch (pawn) {
             case 1:
-                return pawns[0];
+                return pawns.get("paper");
             case 2:
-                return pawns[1];
+                return pawns.get("stone");
             case 3:
-                return pawns[2];
+                return pawns.get("scissors");
         }
     }
 
@@ -22,23 +22,23 @@ export class Options {
         const stone = document.querySelectorAll(".gameBoardItem__image")[1];
         const scissors = document.querySelectorAll(".gameBoardItem__image")[2];
 
-        paper.addEventListener("click", () => { this.click(pawns[0].num, pawns[0].html) });
-        stone.addEventListener("click", () => { this.click(pawns[1].num, pawns[1].html) });
-        scissors.addEventListener("click", () => { this.click(pawns[2].num, pawns[2].html) });
+        paper.addEventListener("click", () => { this.click(pawns.get("paper").num, pawns.get("paper").html) });
+        stone.addEventListener("click", () => { this.click(pawns.get("stone").num, pawns.get("stone").html) });
+        scissors.addEventListener("click", () => { this.click(pawns.get("scissors").num, pawns.get("scissors").html) });
 
         document.addEventListener('keydown', (e) => {
             if (UpdateHtml.isCheck && !e.repeat) {
                 switch (e.code) {
                     case 'ArrowLeft':
-                        this.click(pawns[0].num, pawns[0].html);
+                        this.click(pawns.get("paper").num, pawns.get("paper").html);
                         UpdateHtml.isCheck = false;
                         break;
                     case 'ArrowDown':
-                        this.click(pawns[1].num, pawns[1].html);
+                        this.click(pawns.get("stone").num, pawns.get("stone").html);
                         UpdateHtml.isCheck = false;
                         break;
                     case 'ArrowRight':
-                        this.click(pawns[2].num, pawns[2].html);
+                        this.click(pawns.get("scissors").num, pawns.get("scissors").html);
                         UpdateHtml.isCheck = false;
                         break;
                 }
@@ -56,7 +56,7 @@ export class Options {
         resultOfTurnView.scoreResetInit();
 
         Sound.play('click.wav');
-        const aiOption = ai.generate(pawns[0].num, pawns[2].num); /*Map*/
+        const aiOption = ai.generate(pawns.get("paper").num, pawns.get("scissors").num);
         const aiHtml = this.aiPawn(aiOption).html;
         const matchResult = matchCondition.matchCompare(playerOption, aiOption);
 
