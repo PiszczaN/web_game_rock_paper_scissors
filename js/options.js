@@ -1,27 +1,19 @@
 import { Ai } from "./ai.js";
-import { GamePawn } from "./enums.js";
+import { pawns } from "./enums.js";
+import { Sound } from "./sound.js";
 import { UpdateHtml } from "./update-html.js";
 import { WinConditions } from "./win-conditions.js";
 
-
-
 export class Options {
-
-    constructor() {
-        this.paperPawn = new GamePawn(1, '<div class="gameBoardItem__image">papier</div>');
-        this.stonePawn = new GamePawn(2, '<div class="gameBoardItem__image">kamien</div>');
-        this.scissorsPawn = new GamePawn(3, '<div class="gameBoardItem__image">nozyce</div>');
-    }
-
 
     aiPawn(pawn) {
         switch (pawn) {
             case 1:
-                return this.paperPawn;
+                return pawns[0];
             case 2:
-                return this.stonePawn;
+                return pawns[1];
             case 3:
-                return this.scissorsPawn;
+                return pawns[2];
         }
     }
 
@@ -30,24 +22,46 @@ export class Options {
         const stone = document.querySelectorAll(".gameBoardItem__image")[1];
         const scissors = document.querySelectorAll(".gameBoardItem__image")[2];
 
-        paper.addEventListener("click", () => { this.click(this.paperPawn.num, this.paperPawn.html) });
-        stone.addEventListener("click", () => { this.click(this.stonePawn.num, this.stonePawn.html) });
-        scissors.addEventListener("click", () => { this.click(this.scissorsPawn.num, this.scissorsPawn.html) });
+        paper.addEventListener("click", () => { this.click(pawns[0].num, pawns[0].html) });
+        stone.addEventListener("click", () => { this.click(pawns[1].num, pawns[1].html) });
+        scissors.addEventListener("click", () => { this.click(pawns[2].num, pawns[2].html) });
 
-        //console.log(Options.paperPawn.html);
+        document.addEventListener('keydown', (e) => {
+            if (UpdateHtml.isCheck && !e.repeat) {
+                switch (e.code) {
+                    case 'ArrowLeft':
+                        this.click(pawns[0].num, pawns[0].html);
+                        UpdateHtml.isCheck = false;
+                        break;
+                    case 'ArrowDown':
+                        this.click(pawns[1].num, pawns[1].html);
+                        UpdateHtml.isCheck = false;
+                        break;
+                    case 'ArrowRight':
+                        this.click(pawns[2].num, pawns[2].html);
+                        UpdateHtml.isCheck = false;
+                        break;
+                }
+            }
+
+        });
     }
+
 
     click(playerOption, playerHtml) {
         const ai = new Ai();
         const matchCondition = new WinConditions();
-        const ResultOfTurnView = new UpdateHtml();
+        const resultOfTurnView = new UpdateHtml();
 
-        const aiOption = ai.generate(this.paperPawn.num, this.scissorsPawn.num);
+        resultOfTurnView.scoreResetInit();
+
+        Sound.play('click.wav');
+        const aiOption = ai.generate(pawns[0].num, pawns[2].num); /*Map*/
         const aiHtml = this.aiPawn(aiOption).html;
         const matchResult = matchCondition.matchCompare(playerOption, aiOption);
-        ResultOfTurnView.updateScoreTable(matchResult);
-        ResultOfTurnView.matchResultView(matchResult, playerHtml, aiHtml);
 
+        resultOfTurnView.matchResultView(matchResult, playerHtml, aiHtml);
+        resultOfTurnView.updateScoreTable(matchResult);
     }
 
 }
