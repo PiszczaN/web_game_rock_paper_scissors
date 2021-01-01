@@ -1,5 +1,6 @@
 import { pawns } from "./enums.js";
 import { Options } from "./options.js";
+import { Animations } from "./animations.js";
 
 export class UpdateHtml {
 
@@ -26,16 +27,17 @@ export class UpdateHtml {
         UpdateHtml.winScore = 0;
         UpdateHtml.drawScore = 0;
         UpdateHtml.failScore = 0;
-        UpdateHtml.roundCounter = 1;
+        UpdateHtml.roundCounter = 0;
 
         this.fails.innerHTML = UpdateHtml.failScore;
         this.wins.innerHTML = UpdateHtml.winScore;
         this.draws.innerHTML = UpdateHtml.drawScore;
         this.gameRound.innerHTML = `Runda ${UpdateHtml.roundCounter}. Wybierz symbol`;
+
+        this.matchView();
     }
 
     updateScoreTable(result) {
-
 
         switch (result) {
             case 0:
@@ -62,6 +64,7 @@ export class UpdateHtml {
     }
 
     matchResultView(result, player, computer) {
+        UpdateHtml.isCheck = false;
         const resultLabel = this.matchResultLabel(result);
 
         this.board.innerHTML = `<div class="gameBoard__item">${player}</div><div class="gameBoard__item">${computer}<button class="gameBoard__matchResult">Graj dalej!</button></div>`;

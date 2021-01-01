@@ -3,6 +3,7 @@ import { pawns } from "./enums.js";
 import { Sound } from "./sound.js";
 import { UpdateHtml } from "./update-html.js";
 import { WinConditions } from "./win-conditions.js";
+import { Animations } from "./animations.js";
 
 export class Options {
 
@@ -22,31 +23,32 @@ export class Options {
         const stone = document.querySelectorAll(".gameBoardItem__image")[1];
         const scissors = document.querySelectorAll(".gameBoardItem__image")[2];
 
+        Animations.executeAnimation(paper, 2);
+
         paper.addEventListener("click", () => { this.click(pawns.get("paper").num, pawns.get("paper").html) });
         stone.addEventListener("click", () => { this.click(pawns.get("stone").num, pawns.get("stone").html) });
         scissors.addEventListener("click", () => { this.click(pawns.get("scissors").num, pawns.get("scissors").html) });
 
         document.addEventListener('keydown', (e) => {
-            if (UpdateHtml.isCheck && !e.repeat) {
+            if (UpdateHtml.isCheck) {
                 switch (e.code) {
                     case 'ArrowLeft':
                         this.click(pawns.get("paper").num, pawns.get("paper").html);
-                        UpdateHtml.isCheck = false;
                         break;
                     case 'ArrowDown':
                         this.click(pawns.get("stone").num, pawns.get("stone").html);
-                        UpdateHtml.isCheck = false;
                         break;
                     case 'ArrowRight':
                         this.click(pawns.get("scissors").num, pawns.get("scissors").html);
-                        UpdateHtml.isCheck = false;
                         break;
                 }
+            } else if (!UpdateHtml.isCheck && e.code === 'Enter') {
+                const continueMatch = new UpdateHtml();
+                continueMatch.matchView();
             }
 
         });
     }
-
 
     click(playerOption, playerHtml) {
         const ai = new Ai();
@@ -54,7 +56,6 @@ export class Options {
         const resultOfTurnView = new UpdateHtml();
 
         resultOfTurnView.scoreResetInit();
-
         Sound.play('click.wav');
         const aiOption = ai.generate(pawns.get("paper").num, pawns.get("scissors").num);
         const aiHtml = this.aiPawn(aiOption).html;

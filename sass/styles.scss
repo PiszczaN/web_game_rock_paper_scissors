@@ -123,4 +123,13 @@ body {
     text-transform: uppercase;
 }
 
+.fade_in {
+    opacity: 1;
+    transition: 1.1s opacity;
+}
+
+.fade_out {
+    opacity: 0;
+}
+
 @import 'mobile';
