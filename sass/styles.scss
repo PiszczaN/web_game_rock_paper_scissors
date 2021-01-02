@@ -11,6 +11,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    letter-spacing: 0.1rem;
 }
 
 .header {
@@ -56,6 +57,7 @@ body {
             height: 20vw;
         }
         .gameBoardItem__image {
+            display: block;
             width: 15vw;
             height: 15vw;
             border: solid 1px black;
@@ -121,6 +123,20 @@ body {
     width: 100%;
     font-size: 1rem;
     text-transform: uppercase;
+}
+
+.sound,
+.reset {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sound:hover {
+    text-decoration: line-through;
+}
+
+.buttonOff {
+    text-decoration: line-through;
 }
 
 .fade_in {

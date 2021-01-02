@@ -13,6 +13,15 @@ export class Sound {
 
     static init() {
         const audioButton = document.querySelector(".sound");
-        audioButton.addEventListener("click", () => { Sound.isPlay = !Sound.isPlay; });
+        audioButton.addEventListener("click", () => {
+            Sound.isPlay = !Sound.isPlay;
+
+            if (Sound.isPlay) {
+                audioButton.classList.remove("buttonOff");
+            } else if (!Sound.isPlay) {
+                audioButton.classList.add("buttonOff");
+            }
+
+        });
     }
 }

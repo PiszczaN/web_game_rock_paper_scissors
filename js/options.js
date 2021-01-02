@@ -23,7 +23,7 @@ export class Options {
         const stone = document.querySelectorAll(".gameBoardItem__image")[1];
         const scissors = document.querySelectorAll(".gameBoardItem__image")[2];
 
-        Animations.executeAnimation(paper, 2);
+        //Animations.executeAnimation(paper, 2);
 
         paper.addEventListener("click", () => { this.click(pawns.get("paper").num, pawns.get("paper").html) });
         stone.addEventListener("click", () => { this.click(pawns.get("stone").num, pawns.get("stone").html) });
