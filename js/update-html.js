@@ -1,6 +1,6 @@
 import { pawns } from "./enums.js";
 import { Options } from "./options.js";
-import { Animations } from "./animations.js";
+import { scoreAnimation, DOMelements, continueMatchAnimation, matchResultAnimation } from "./animations.js";
 
 export class UpdateHtml {
 
@@ -42,12 +42,15 @@ export class UpdateHtml {
         switch (result) {
             case 0:
                 this.fails.innerHTML = ++UpdateHtml.failScore;
+                scoreAnimation(DOMelements.failScore);
                 break;
             case 1:
                 this.wins.innerHTML = ++UpdateHtml.winScore;
+                scoreAnimation(DOMelements.winScore);
                 break;
             case 2:
                 this.draws.innerHTML = ++UpdateHtml.drawScore;
+                scoreAnimation(DOMelements.drawScore);
                 break;
         }
     }
@@ -67,8 +70,9 @@ export class UpdateHtml {
         UpdateHtml.isCheck = false;
         const resultLabel = this.matchResultLabel(result);
 
-        this.board.innerHTML = `<div class="gameBoard__item">${player}</div><div class="gameBoard__item">${computer}<button class="gameBoard__matchResult">Graj dalej!</button></div>`;
+        this.board.innerHTML = `<div class="gameBoard__item">${player}</div><div class="gameBoard__item">${computer}<span class="gameBoard__matchResult"><button class="gameBoard__matchResultButton">Graj dalej!</button></span></div>`;
         const backToMatchView = document.querySelector(".gameBoard__matchResult");
+        matchResultAnimation();
 
         this.gameRound.innerHTML = resultLabel;
         backToMatchView.addEventListener("click", () => { this.matchView() });
@@ -81,6 +85,7 @@ export class UpdateHtml {
             <div class = "gameBoard__item">${pawns.get("stone").html}${pawns.get("arrowDown").html}</div>
             <div class = "gameBoard__item">${pawns.get("scissors").html}${pawns.get("arrowRight").html}</div>`;
 
+        continueMatchAnimation();
         const gameResume = new Options();
         gameResume.init();
     }

@@ -1,12 +1,40 @@
-export class Animations {
-    static addAnimation(element, animation) {
-        element.classList.add("fade_in", "fade_out");
-    }
+export const animationClasses = {
+    scale: "scale",
+    scaleIn: "scale_in",
+    shake: "shake"
+};
 
-    static executeAnimation(element, animation) {
+export const DOMelements = {
+    winScore: document.querySelector(".wins"),
+    drawScore: document.querySelector(".draws"),
+    failScore: document.querySelector(".fails"),
+    gameBoard: document.querySelector(".gameBoard")
 
-        element.classList.remove("fade_out");
+};
 
+export const scoreAnimation = (element) => {
 
-    }
+    element.classList.add(`${animationClasses.scale}`);
+
+    setTimeout(() => {
+        element.classList.remove(`${animationClasses.scale}`);
+    }, 500);
+
+}
+
+export const continueMatchAnimation = () => {
+
+    DOMelements.gameBoard.classList.add(`${animationClasses.scaleIn}`);
+
+    setTimeout(() => {
+        DOMelements.gameBoard.classList.remove(`${animationClasses.scaleIn}`);
+    }, 500);
+}
+
+export const matchResultAnimation = () => {
+    DOMelements.gameBoard.classList.add(`${animationClasses.shake}`);
+
+    setTimeout(() => {
+        DOMelements.gameBoard.classList.remove(`${animationClasses.shake}`);
+    }, 500);
 }

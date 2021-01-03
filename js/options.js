@@ -3,7 +3,6 @@ import { pawns } from "./enums.js";
 import { Sound } from "./sound.js";
 import { UpdateHtml } from "./update-html.js";
 import { WinConditions } from "./win-conditions.js";
-import { Animations } from "./animations.js";
 
 export class Options {
 
@@ -23,11 +22,11 @@ export class Options {
         const stone = document.querySelectorAll(".gameBoardItem__image")[1];
         const scissors = document.querySelectorAll(".gameBoardItem__image")[2];
 
-        //Animations.executeAnimation(paper, 2);
-
         paper.addEventListener("click", () => { this.click(pawns.get("paper").num, pawns.get("paper").html) });
         stone.addEventListener("click", () => { this.click(pawns.get("stone").num, pawns.get("stone").html) });
         scissors.addEventListener("click", () => { this.click(pawns.get("scissors").num, pawns.get("scissors").html) });
+
+
 
         document.addEventListener('keydown', (e) => {
             if (UpdateHtml.isCheck) {
