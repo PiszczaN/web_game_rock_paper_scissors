@@ -41,7 +41,7 @@ export class Options {
                         this.click(pawns.get("scissors").num, pawns.get("scissors").html);
                         break;
                 }
-            } else if (!UpdateHtml.isCheck && e.code === 'Enter') {
+            } else if (!UpdateHtml.isCheck && UpdateHtml.displayButton && e.code === 'Enter') {
                 const continueMatch = new UpdateHtml();
                 continueMatch.matchView();
             }

@@ -8,8 +8,9 @@ export const DOMelements = {
     winScore: document.querySelector(".wins"),
     drawScore: document.querySelector(".draws"),
     failScore: document.querySelector(".fails"),
-    gameBoard: document.querySelector(".gameBoard")
-
+    gameBoard: document.querySelector(".gameBoard"),
+    gameRound: document.querySelector(".game__round"),
+    pawnPlaces: document.querySelectorAll(".gameBoard__item")
 };
 
 export const scoreAnimation = (element) => {
@@ -24,17 +25,21 @@ export const scoreAnimation = (element) => {
 
 export const continueMatchAnimation = () => {
 
-    DOMelements.gameBoard.classList.add(`${animationClasses.scaleIn}`);
+    DOMelements.pawnPlaces.forEach(element => {
+        element.classList.add(`${animationClasses.scaleIn}`);
 
-    setTimeout(() => {
-        DOMelements.gameBoard.classList.remove(`${animationClasses.scaleIn}`);
-    }, 500);
+        setTimeout(() => {
+            element.classList.remove(`${animationClasses.scaleIn}`);
+        }, 500);
+    });
 }
 
 export const matchResultAnimation = () => {
-    DOMelements.gameBoard.classList.add(`${animationClasses.shake}`);
+    DOMelements.pawnPlaces.forEach(element => {
+        element.classList.add(`${animationClasses.shake}`);
 
-    setTimeout(() => {
-        DOMelements.gameBoard.classList.remove(`${animationClasses.shake}`);
-    }, 500);
+        setTimeout(() => {
+            element.classList.remove(`${animationClasses.shake}`);
+        }, 500);
+    });
 }

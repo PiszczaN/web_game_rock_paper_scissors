@@ -157,6 +157,10 @@ body {
     animation: shake 0.5s;
 }
 
+.none {
+    display: none;
+}
+
 @keyframes scale1 {
     0% {
         transform: scale(2);

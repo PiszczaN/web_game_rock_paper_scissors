@@ -4,19 +4,12 @@ import { scoreAnimation, DOMelements, continueMatchAnimation, matchResultAnimati
 
 export class UpdateHtml {
 
-    constructor() {
-        this.board = document.querySelector(".gameBoard");
-        this.gameRound = document.querySelector(".game__round");
-        this.wins = document.querySelector(".wins");
-        this.draws = document.querySelector(".draws");
-        this.fails = document.querySelector(".fails");
-    }
-
     static winScore = 0;
     static drawScore = 0;
     static failScore = 0;
     static roundCounter = 1;
     static isCheck = true;
+    static displayButton = false;
 
     scoreResetInit() {
         const scoreResetButton = document.querySelector(".reset");
@@ -29,10 +22,10 @@ export class UpdateHtml {
         UpdateHtml.failScore = 0;
         UpdateHtml.roundCounter = 0;
 
-        this.fails.innerHTML = UpdateHtml.failScore;
-        this.wins.innerHTML = UpdateHtml.winScore;
-        this.draws.innerHTML = UpdateHtml.drawScore;
-        this.gameRound.innerHTML = `Runda ${UpdateHtml.roundCounter}. Wybierz symbol`;
+        DOMelements.failScore.innerHTML = UpdateHtml.failScore;
+        DOMelements.winScore.innerHTML = UpdateHtml.winScore;
+        DOMelements.drawScore.innerHTML = UpdateHtml.drawScore;
+        DOMelements.gameRound.innerHTML = `Runda ${UpdateHtml.roundCounter}. Wybierz symbol`;
 
         this.matchView();
     }
@@ -41,15 +34,15 @@ export class UpdateHtml {
 
         switch (result) {
             case 0:
-                this.fails.innerHTML = ++UpdateHtml.failScore;
+                DOMelements.failScore.innerHTML = ++UpdateHtml.failScore;
                 scoreAnimation(DOMelements.failScore);
                 break;
             case 1:
-                this.wins.innerHTML = ++UpdateHtml.winScore;
+                DOMelements.winScore.innerHTML = ++UpdateHtml.winScore;
                 scoreAnimation(DOMelements.winScore);
                 break;
             case 2:
-                this.draws.innerHTML = ++UpdateHtml.drawScore;
+                DOMelements.drawScore.innerHTML = ++UpdateHtml.drawScore;
                 scoreAnimation(DOMelements.drawScore);
                 break;
         }
@@ -70,20 +63,31 @@ export class UpdateHtml {
         UpdateHtml.isCheck = false;
         const resultLabel = this.matchResultLabel(result);
 
-        this.board.innerHTML = `<div class="gameBoard__item">${player}</div><div class="gameBoard__item">${computer}<span class="gameBoard__matchResult"><button class="gameBoard__matchResultButton">Graj dalej!</button></span></div>`;
-        const backToMatchView = document.querySelector(".gameBoard__matchResult");
-        matchResultAnimation();
+        DOMelements.pawnPlaces[0].innerHTML = `${player}`;
+        DOMelements.pawnPlaces[1].innerHTML = `${computer}`;
+        DOMelements.pawnPlaces[2].classList.add("none");
 
-        this.gameRound.innerHTML = resultLabel;
-        backToMatchView.addEventListener("click", () => { this.matchView() });
+        setTimeout(() => {
+            DOMelements.pawnPlaces[1].innerHTML += `<span class="gameBoard__matchResult"><button class="gameBoard__matchResultButton">Graj dalej!</button></span>`;
+            UpdateHtml.displayButton = true;
+
+            const backToMatchView = document.querySelector(".gameBoard__matchResult");
+            backToMatchView.addEventListener("click", () => { this.matchView() });
+        }, 500);
+
+        matchResultAnimation();
+        DOMelements.gameRound.innerHTML = resultLabel;
     }
 
     matchView() {
         UpdateHtml.isCheck = true;
-        this.gameRound.innerHTML = `Runda ${++UpdateHtml.roundCounter}. Wybierz symbol`;
-        this.board.innerHTML = `<div class="gameBoard__item">${pawns.get("paper").html}${pawns.get("arrowLeft").html}</div>
-            <div class = "gameBoard__item">${pawns.get("stone").html}${pawns.get("arrowDown").html}</div>
-            <div class = "gameBoard__item">${pawns.get("scissors").html}${pawns.get("arrowRight").html}</div>`;
+        UpdateHtml.displayButton = false;
+        DOMelements.gameRound.innerHTML = `Runda ${++UpdateHtml.roundCounter}. Wybierz symbol`;
+        DOMelements.pawnPlaces[2].classList.remove("none");
+
+        DOMelements.pawnPlaces[0].innerHTML = `${pawns.get("paper").html}${pawns.get("arrowLeft").html}`;
+        DOMelements.pawnPlaces[1].innerHTML = `${pawns.get("stone").html}${pawns.get("arrowDown").html}`;
+        DOMelements.pawnPlaces[2].innerHTML = `${pawns.get("scissors").html}${pawns.get("arrowRight").html}`;
 
         continueMatchAnimation();
         const gameResume = new Options();
