@@ -67,6 +67,8 @@ export class UpdateHtml {
         DOMelements.pawnPlaces[1].innerHTML = `${computer}`;
         DOMelements.pawnPlaces[2].classList.add("none");
 
+        console.log();
+
         setTimeout(() => {
             DOMelements.pawnPlaces[1].innerHTML += `<span class="gameBoard__matchResult"><button class="gameBoard__matchResultButton">Graj dalej!</button></span>`;
             UpdateHtml.displayButton = true;

@@ -1,10 +1,12 @@
 @import 'config';
 @import 'utilities';
+@import 'animations';
 body {
     background-color: $primary-color;
     margin: 0;
     padding: 0;
     font-family: $font-stack;
+    color: $second-color;
 }
 
 * {
@@ -60,8 +62,18 @@ body {
             display: block;
             width: 15vw;
             height: 15vw;
-            border: solid 1px black;
+            border: solid 1px $second-color;
             margin: auto;
+            background-color: #DEE9EE;
+            &--lose {
+                background-color: #F57E5D;
+            }
+            &--win {
+                background-color: #008B75;
+            }
+            &--draw {
+                background-color: #FFD58C;
+            }
         }
         .gameBoardItem__icon {
             display: flex;
@@ -101,6 +113,14 @@ body {
     }
 }
 
+.sound:hover {
+    text-decoration: line-through;
+}
+
+.buttonOff {
+    text-decoration: line-through;
+}
+
 .gameBoard__matchResult {
     position: absolute;
     width: 100%;
@@ -133,68 +153,7 @@ body {
 
 .sound,
 .reset {
-    text-decoration: none;
     cursor: pointer;
-}
-
-.sound:hover {
-    text-decoration: line-through;
-}
-
-.buttonOff {
-    text-decoration: line-through;
-}
-
-.scale {
-    animation: scale1 0.5s;
-}
-
-.scale_in {
-    animation: scale_in 0.5s;
-}
-
-.shake {
-    animation: shake 0.5s;
-}
-
-.none {
-    display: none;
-}
-
-@keyframes scale1 {
-    0% {
-        transform: scale(2);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes scale_in {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes shake {
-    0% {
-        transform: rotate(0deg);
-    }
-    15% {
-        transform: rotate(10deg);
-    }
-    45% {
-        transform: rotate(-10deg);
-    }
-    75% {
-        transform: rotate(10deg);
-    }
-    100% {
-        transform: rotate(-10deg);
-    }
 }
 
 @import 'mobile';
